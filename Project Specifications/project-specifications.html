@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- For mobile viewing -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
+
+    <style>
+        .container {
+            max-width: 800px;
+            margin-bottom: 50px;
+        }
+
+        .img-responsive {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            margin-top: 30px;
+        }
+
+        h4 {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <div>
+        <img class="img-responsive center-block" src="assignment_spec_images/wassup_logo.png" alt=""/>
+    </div>
+    <h1>CS349 Assignment 4</h1>
+    <strong><em>Due: Friday, April 3, 2015, 5PM EST</em></strong>
+
+    <div>
+        <h2>Assignment Goals</h2>
+
+        <p>
+            The goals of this assignment are to give you an opportunity to implement a front-end web application that
+            communicates with a web framework (using classic web requests and AJAX calls) that can store and retrieve
+            data to/from a database.
+        </p>
+
+    </div>
+
+    <div>
+        <h2>Assignment Overview</h2>
+
+        <p>
+            In this assignment, you will create a web application called
+            <em>Wassup</em>, which allows users to send a "sup?" message to their friends. "sup?" is short-hand for
+            "what's up?", which is an common alternative way to say "hello!"
+        </p>
+
+        <p>
+            Specifically, users should be able to
+        <ul>
+            <li>log in and log out of the application</li>
+            <li>add/remove friends to/from the contact list</li>
+            <li>view a list of the friends in their contact list</li>
+            <li>select 1 or more friends in the contact list, and send a "sup?" message to them</li>
+            <li>view "sup?" messages from friends</li>
+            <li>clear a particular "sup?" message from the deck</li>
+            <li>switch between a private versus public server</li>
+        </ul>
+
+
+    </div>
+
+
+    <div>
+        <h2>
+            Implementation Requirements
+        </h2>
+
+        <h4>User Interface</h4>
+        The wireframe for this application is shown here:
+        <img src="assignment_spec_images/mockup.png" class="img-responsive">
+        </p>
+
+        <h4>Login / Logout</h4>
+
+        <p>We assume the user ID is set in a cookie. If it is not set, users will be redirected to a login page
+            (views/wassup_login.html). The login functionality is provided and is fully functional. However, you should
+            provide additional styling of the login page such that it is consistent with the look of your application.
+            The logout function is provided in the server. You need to implement a logout link/button in the user
+            interace, which will issue a form POST to the server to handle logout.
+        </p>
+
+        <h4>Contact List</h4>
+
+        <p>The contact list should display a list of friends a user has. The user should be able to add a new friend
+            (using a unique alias) or remove a friend from the contact list.
+        </p>
+
+        <h4>Sending and Receiving "Sup?" Messages</h4>
+
+        <p>
+            The "sup?" message should be drawn on the HTML canvas by randomly manipulating the graphic context before
+            calling fillText() on the HTML canvas. That is, each time the user receives a "sup?" message from a friend,
+            that message should have a different look, color and size from the previous message.
+        </p>
+
+        <p>
+            The system should periodically poll the server to check if there are "sup?" messages. The "sup?" messages
+            should be displayed one at a time, with the most recent message displayed first. Each "Sup?" message should
+            be accompanied by information about who sent it and at what time. Users should be able to click on a "next"
+            and "previous" button to see the next or previous "sup?" message.
+        </p>
+
+        <p>The frontend implementation will involve modifications to the following files:
+        <ul>
+            <li>views/wassup_app.html</li>
+            <li>views/wassup_login.html</li>
+            <li>static/css/wassup.css</li>
+            <li>static/js/wassup.js</li>
+        </ul>
+        </p>
+
+        <h4>Switching between Private and Public Server</h4>
+        There are two server locations -- the public server is at http://104.197.3.113, the private server is at
+        http://localhost, i.e., on your own machine. The public server is accessible by all CS349 students, and so you
+        can use the server to send/receive "sup?" messages to/from your classmates, as long as you know their user ID.
+
+        Your application needs to provide a way for users to switch between using the private and public server. The
+        ability to switch to a private (i.e., local) server is useful when the public server is down or if the response
+        is slow. Your application needs to be able to deal gracefully with errors and latency issues. When appropriate,
+        you should also incorporate into the user interface components (e.g., progress bar, busy indicators) to help the
+        application maintain responsiveness, by providing feedback to the users about the status/progress of their
+        requests.
+
+        <h4>Responsive Design</h4>
+
+        <p> Your frontend designs need to be <b>responsive</b> and display well both on the desktop and mobile devices.
+            When the width is <= 450, the application should switch to mobile mode. In the mobile mode, the layout
+            should change to fit the smaller screen size, which may require resizing some of the user interface
+            components and disabling some of the functionalities. Below is a screenshot of an example of a mobile
+            version of the "Wassup!" application.</p>
+        <img src="assignment_spec_images/responsive.png" class="img-responsive">
+
+
+        <h4>Client-Server Communication</h4>
+
+        <p>
+            The backend server (wassup.py) is written using a web framework called Python-Bottle
+            (http://bottlepy.org/docs/dev/index.html). You should use the provided backend system as is, without having
+            to make any modifications.
+        </p>
+
+        <p>
+            To run the backend server <i>privately</i> on your local machine, type "python wassup.py" in the terminal,
+            then go to "http://localhost:8080" using a web browser. You can run print_db.py to print out the content of
+            the database. This is maybe useful for debugging purposes. Alternatively, your application can communicate
+            with the public server directly at http://104.197.3.113.
+        </p>
+
+        <p>
+            Each "sup?" message has a unique sup_id. This ID is used to uniquely identify each "sup?" message so that
+            users can clear a particular "sup?" message from their deck.
+        </p>
+
+        <p>
+            Your application can call the backend with the following commands and associated data:
+        <ul>
+            <li>
+                <b>create_user</b>
+                <ul>
+                    <li>input: user_id, full_name</li>
+                    <li>output: a string (upon the successful execution of the command)</li>
+                </ul>
+            </li>
+            <li>
+                <b>add_friend</b>
+                <ul>
+                    <li>input: user_id</li>
+                    <li>output: a string (upon the successful execution of the command)</li>
+                </ul>
+            </li>
+            <li>
+                <b>remove_friend</b>
+                <ul>
+                    <li>input: user_id</li>
+                    <li>output: a string (upon the successful execution of the command)</li>
+                </ul>
+            </li>
+            <li>
+                <b>get_friends</b>
+                <ul>
+                    <li>input: user_id</li>
+                    <li>output: a list of key-value pairs listing the user_id and full_name of each friend.</li>
+                </ul>
+            </li>
+            <li>
+                <b>send_sup</b>
+                <ul>
+                    <li>input: user_id, sup_id, date</li>
+                    <li>output: a string (upon the successful execution of the command)</li>
+                </ul>
+            </li>
+            <li>
+                <b>remove_sup</b>
+                <ul>
+                    <li>input: sup_id</li>
+                    <li>output: a string (upon the successful execution of the command)</li>
+                </ul>
+            </li>
+            <li>
+                <b>clear_sups</b>
+                <ul>
+                    <li>input: sup_id</li>
+                    <li>output: a string (upon the successful execution of the command)</li>
+                </ul>
+            </li>
+        </ul>
+        Some sample code for making an AJAX call to the server is provided in static/js/wassup.js. Essentially, to issue
+        a request to the server, you need to pass in a JSON object inside the handleAjaxRequest() method with the
+        following properties (all required):
+        <ul>
+            <li><b>protocol_version</b>: A number indicating the version of the server implementation. It is in general
+                good practice to include the protocol version number in case the server implementation changes. For the
+                purpose of this assignment, you can send "1.0" as the protocol version number.
+            </li>
+            <li><b>message_id</b>: The ID of the message being sent. This is an unique identifier generated by the
+                client to distinguish one message from another.
+            </li>
+            <li><b>command</b>: The actual command to execute (as shown above)</li>
+            <li><b>command_data</b>: Command-specific data (as shown above, null if there is none)</li>
+        </ul>
+
+        </p>
+        <p>
+            In response to the request, the server will return a JSON object with the following key-value pairs (all
+            fields will be present in every response):
+        <ul>
+            <li><b>protocol_version</b>: The protocol version the server is using</li>
+            <li><b>error</b>: string representing the error encountered, or empty string if no error</li>
+            <li><b>command</b>: The command this object is a response to</li>
+            <li><b>message_id</b>: The ID of the original request/message</li>
+            <li><b>reply_data</b>: The return data for executing the command. Undefined if an error. The type
+                of data returned is command-specific.
+            </li>
+        </ul>
+        </p>
+    </div>
+
+    <div>
+        <h2>
+            Testing
+        </h2>
+
+        <p>
+            No unit testing is required for this assignment.
+        </p>
+    </div>
+
+    <div>
+        <h2>Implementation Constraints</h2>
+
+        <p>
+            You must complete the assignment within the following constraints:
+        </p>
+
+        <ul>
+            <li>You must use only HTML, JavaScript, CSS and Python, and the included JavaScript and CSS files.
+                <em>You may not use any other web frameworks, or third-party JavaScript, CSS or Python files for this
+                    assignment</em>, except for <b>underscore.js</b> and <b>bootstrap (js and css)</b>.
+            </li>
+            <li>
+                The wireframe designs are meant to be a suggestion for how the interface and interaction could be
+                supported. You have latitude to change how users provide input to the system, but it must be
+                <em>at least</em> as usable as the design we provide. You will also need to improve the visual design
+                beyond the sparse wireframe designs provided.
+            </li>
+            <li>
+                All of your JavaScript files should work with (and include) <code>'use strict';</code>.
+            </li>
+            <li>
+                You may use <em>code snippets</em> from third-party sources, but not entire solutions. For example,
+                your graphing code <em>must be your own</em>. You must cite the use of any third-party code (including
+                a URL if the example was obtained online).
+            </li>
+            <li>
+                Your assignment may not make use of any external files loaded over the Internet.
+            </li>
+            <li>
+                <b>Server Etiquette</b>: Any friend you add to the public server will be visible to anyone else. You
+                should not post any content to the public server that would be deemed offensive or against university
+                regulations or the law. We will be logging each access to the public server.
+            </li>
+        </ul>
+    </div>
+
+    <div>
+        <h2>Marking</h2>
+
+        <p>
+            To receive a great mark, you must implement the system as described above, under the given constraints,
+            with all unit tests passing, while having an aesthetically pleasing design and a great user experience.
+        </p>
+
+        <p>
+            As a <em>rough</em> guide, <em>about 25%</em> of your mark will be allocated to the visual design and user
+            experience,
+            with the rest allocated to implementation concerns.
+        </p>
+
+        <p>
+            TAs will mark your assignment using the latest version of Chrome on whatever platform
+            they use on a daily basis. In theory, the specific platform shouldn't matter. If we
+            find platform differences, we'll handle them as they arise. They will mark the assignment
+            in "offline" mode (i.e., with no access to the Internet).
+        </p>
+
+    </div>
+
+    <div>
+        <h2>How to Submit</h2>
+        You will use subversion to both check out and submit your assignment. Details can be found on the
+        <a href="https://hci.cs.uwaterloo.ca/courses/CS349/w15/about.html#svn">course website</a>.
+    </div>
+
+</div>
+
+</body>
+</html>
+

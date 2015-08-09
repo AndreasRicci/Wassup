@@ -1,0 +1,190 @@
+.page {
+    display: none;
+}
+
+.navbar-brand .logo {
+    margin-top: -8px;
+}
+
+#page-loading-progress-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 9999999;
+    background-color: rgba(0, 0, 0, 0.85);
+    transition: 0.5s 0.25s;
+    text-align: center;
+}
+
+#page-loading-progress-container #page-loading-progress-description {
+    position: absolute;
+    top: calc(50% - 30px);
+    width: 100%;
+    text-align: center;
+    color: #ffffff;
+    font-size: 18px;
+}
+
+#page-loading-progress-container #page-loading-progress-bar-container {
+    position: fixed;
+    height: 20px;
+    left: 20px;
+    right: 20px;
+    top: 50%;
+    transition: 0.5s;
+}
+
+#page-loading-progress-container #page-loading-progress-bar {
+    height: 20px;
+    position: absolute;
+    width: 0;
+    transition: 1s;
+}
+
+#send-sups-button-container {
+    margin-top: 5px;
+}
+
+.footer-container {
+    margin-top: 10px;
+}
+
+#add-friend-form-container {
+    margin-bottom: 15px;
+}
+
+.table-hover tbody tr:hover, .table-hover tbody tr:hover {
+    background-color: #CCE6FF;
+}
+
+tbody tr.checked {
+    background-color: #6ddc6d !important;
+}
+
+.send-to-label {
+    cursor: pointer;
+}
+
+.page-error-message-container, .page-success-message-container, .page-info-message-container {
+    display: none;
+}
+
+#page-send-sups #friend-list-table-container {
+    max-height: 50vh;
+    overflow-y: auto;
+}
+
+.loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 100;
+    background-color: white;
+    display: none;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+
+.loading-overlay .loading {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+}
+
+.currently-loading {
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.currently-loading .loading-overlay {
+    display: block;
+    opacity: 0.75;
+    filter: alpha(opacity=75);
+}
+
+.canvas-container {
+    width: 100%;
+    height: 100%;
+    background-color: #a3a3a3;
+}
+
+canvas {
+    width: 100%;
+    height: 100%;
+    background-color: #a3a3a3;
+}
+
+.remove-sup {
+    margin-left: 5px;
+}
+
+.sup-caption {
+    margin-top: 5px;
+}
+
+.sup-caption span {
+    font-weight: bold;
+}
+
+.sup-number, .total-sups {
+    font-weight: bold;
+}
+
+.no-sups {
+    font-weight: bold;
+}
+
+#outer-container.currently-loading {
+    min-height: 60px;
+}
+
+@-webkit-keyframes spinning {
+    0%, 100% {
+        box-shadow: 0em 1em 0 0.125em black, 1em 1em 0 0.25em black, 1em 0em 0 0.125em black, 1em -1em 0 0em black, 0em -1em 0 0em black, -1em -1em 0 0em black, -1em 0em 0 0em black, -1em 1em 0 0em black;
+        /* bottom left */
+    }
+    12.5% {
+        box-shadow: 0em 1em 0 0em black, 1em 1em 0 0.125em black, 1em 0em 0 0.25em black, 1em -1em 0 0.125em black, 0em -1em 0 0em black, -1em -1em 0 0em black, -1em 0em 0 0em black, -1em 1em 0 0em black;
+        /* bottom left */
+    }
+    25% {
+        box-shadow: 0em 1em 0 0em black, 1em 1em 0 0em black, 1em 0em 0 0.125em black, 1em -1em 0 0.25em black, 0em -1em 0 0.125em black, -1em -1em 0 0em black, -1em 0em 0 0em black, -1em 1em 0 0em black;
+        /* bottom left */
+    }
+    37.5% {
+        box-shadow: 0em 1em 0 0em black, 1em 1em 0 0em black, 1em 0em 0 0em black, 1em -1em 0 0.125em black, 0em -1em 0 0.25em black, -1em -1em 0 0.125em black, -1em 0em 0 0em black, -1em 1em 0 0em black;
+        /* bottom left */
+    }
+    50% {
+        box-shadow: 0em 1em 0 0em black, 1em 1em 0 0em black, 1em 0em 0 0em black, 1em -1em 0 0em black, 0em -1em 0 0.125em black, -1em -1em 0 0.25em black, -1em 0em 0 0.125em black, -1em 1em 0 0em black;
+        /* bottom left */
+    }
+    62.5% {
+        box-shadow: 0em 1em 0 0em black, 1em 1em 0 0em black, 1em 0em 0 0em black, 1em -1em 0 0em black, 0em -1em 0 0em black, -1em -1em 0 0.125em black, -1em 0em 0 0.25em black, -1em 1em 0 0.125em black;
+        /* bottom left */
+    }
+    75% {
+        box-shadow: 0em 1em 0 0.125em black, 1em 1em 0 0em black, 1em 0em 0 0em black, 1em -1em 0 0em black, 0em -1em 0 0em black, -1em -1em 0 0em black, -1em 0em 0 0.125em black, -1em 1em 0 0.25em black;
+        /* bottom left */
+    }
+    87.5% {
+        box-shadow: 0em 1em 0 0.25em black, 1em 1em 0 0.125em black, 1em 0em 0 0em black, 1em -1em 0 0em black, 0em -1em 0 0em black, -1em -1em 0 0em black, -1em 0em 0 0em black, -1em 1em 0 0.125em black;
+        /* bottom left */
+    }
+}
+
+.spinner {
+    display: inline-block;
+    font-size: 10px;
+    width: .4em;
+    height: .4em;
+    border-radius: 50%;
+    -webkit-animation: spinning .75s infinite;
+}
+
+/*# sourceMappingURL=wassup.css.map */

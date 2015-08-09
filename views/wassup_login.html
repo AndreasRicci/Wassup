@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Login - Wassup">
+    <meta name="author" content="Andreas Ricci">
+
+    <title>Login - Wassup</title>
+
+    <link rel="stylesheet" type="text/css" href="static/css/ext/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="static/css/ext/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" type="text/css" href="static/css/wassup.css"/>
+
+    <script type="text/javascript" src="static/js/page-load-progress-tracking.js"></script>
+</head>
+<body>
+<div id="page-loading-progress-container">
+    <div id="page-loading-progress-description">
+        Page loading...
+    </div>
+    <div class="progress" id="page-loading-progress-bar-container">
+        <div class="progress-bar progress-bar-striped active" id="page-loading-progress-bar" role="progressbar"
+             aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+            <span id="page-loading-progress-percent">0%</span>
+        </div>
+    </div>
+</div>
+
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+                <img class="logo" alt="Wassup logo" src="static/images/wassup_logo.png"/>
+            </div>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <form class="navbar-form navbar-right" id="login-form" method="POST" action="/logged_in"
+                  enctype="multipart/form-data">
+                <div class="form-group">
+                    <input type="text" id="user_id" name="user_id" placeholder="Desired username" class="form-control"
+                           required>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="full_name" name="full_name" placeholder="Full name" class="form-control"
+                           required>
+                </div>
+                <button type="submit" id="log_in_button" class="btn btn-success">Log in</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+%if error_message:
+<div class="container error_message_container">
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                aria-hidden="true">&times;</span></button>
+        <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> <strong>Oops, there was an
+        error</strong>
+
+        <p><em id="error_message">{{error_message}}</em></p>
+
+        <p><strong>Please address the error (if applicable) and try again.</strong></p>
+    </div>
+</div>
+%end
+
+<div class="container">
+    <div class="jumbotron">
+        <h1>Welcome to Wassup!</h1>
+
+        <p class="hidden-xs">Please log in using the form at the top of this page to continue.</p>
+
+        <p class="hidden-sm hidden-md hidden-lg">Please tap the button at the top of this page and log in to
+            continue.</p>
+    </div>
+</div>
+
+<div class="container">
+    <footer id="footer">
+        <p>Created by Andreas Ricci in Winter 2015 for CS 349.</p>
+    </footer>
+</div>
+
+<script type="text/javascript" src="static/js/ext/underscore.js"></script>
+<script type="text/javascript" src="static/js/ext/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="static/js/ext/bootstrap.min.js"></script>
+<script type="text/javascript" src="static/js/utils.js"></script>
+<script type="text/javascript" src="static/js/model.js"></script>
+<script type="text/javascript" src="static/js/view.js"></script>
+<script type="text/javascript" src="static/js/login-main.js"></script>
+</body>
+</html>

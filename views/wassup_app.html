@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Wassup">
+    <meta name="author" content="Andreas Ricci">
+
+    <title>Wassup</title>
+
+    <link rel="stylesheet" type="text/css" href="static/css/ext/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="static/css/ext/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" type="text/css" href="static/css/wassup.css"/>
+
+    <script type="text/javascript" src="static/js/page-load-progress-tracking.js"></script>
+</head>
+<body>
+<div id="page-loading-progress-container">
+    <div id="page-loading-progress-description">
+        Page loading...
+    </div>
+    <div class="progress" id="page-loading-progress-bar-container">
+        <div class="progress-bar progress-bar-striped active" id="page-loading-progress-bar" role="progressbar"
+             aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+            <span id="page-loading-progress-percent">0%</span>
+        </div>
+    </div>
+</div>
+
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+                <img class="logo" alt="Wassup logo" src="static/images/wassup_logo.png"/>
+            </div>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-left">
+                <li><a id="page-link-instructions" href="#">Home</a></li>
+                <li><a id="page-link-send-sups" href="#">Send Sups</a></li>
+                <li><a id="page-link-view-sups" href="#">View Sups</a></li>
+            </ul>
+            <div class="navbar-right">
+                <ul class="nav navbar-nav navbar-left">
+                    <li class="dropdown">
+                        <a id="choose-server-dropdown" href="#" class="dropdown-toggle" data-toggle="dropdown"
+                           role="button" aria-expanded="false">Server &#8212; <em><span
+                                id="choose-server-dropdown-current-server"> </span></em> <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li role="presentation" class="dropdown-header">Server Selection</li>
+                            <li><a class="server-selection-link" id="choose-server-dropdown-selection-private" href="#">Switch
+                                to <em>Private</em></a></li>
+                            <li><a class="server-selection-link" id="choose-server-dropdown-selection-public" href="#">Switch
+                                to <em>Public</em></a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form class="navbar-form navbar-right" method="POST" action="/logout">
+                    <button type="submit" class="btn btn-danger btn-sm" id="logout-button">Log out of <span
+                            id="username"></span></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div id="page-instructions" class="container page">
+    <div class="page-header">
+        <h1>Instructions
+            <small>Learn how to use Wassup</small>
+        </h1>
+    </div>
+
+    <p class="lead">Wassup is simple to use:</p>
+    <ul>
+        <li><strong>Sending Sups and managing friends:</strong> Click "Send Sups" at the top to send Sup messages to
+            friends. You can also conveniently add or remove friends here.
+        </li>
+        <li><strong>Viewing and deleting Sups from friends:</strong> Click "View Sups" at the top to send see Sup
+            messages from friends. You can also delete Sup messages from friends here.
+        </li>
+        <li><strong>Switching servers:</strong> You can see which server you are currently connected to at the top right
+            corner of the screen. Click this to see what servers are available.
+        </li>
+        <li><strong>Logging out:</strong> You can click the red button in the top right corner of the screen to log out.
+        </li>
+    </ul>
+</div>
+
+<div id="page-send-sups" class="container page">
+    <div class="page-header">
+        <h1>Send Sups to Friends</h1>
+    </div>
+    <p class="lead">Select one or more friends to send to, then hit "Send Sups". <br/> You can also add or remove
+        friends here, using the buttons below.</p>
+
+    <div id="success-message-send-sups" class="page-success-message-container message-box">
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close close-error-box"><span aria-hidden="true">&times;</span></button>
+            <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> <strong>Success</strong>
+
+            <p><em class="success_message">SUCCESS_MESSAGE</em></p>
+        </div>
+    </div>
+
+    <div id="error-message-send-sups" class="page-error-message-container message-box">
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close close-error-box"><span aria-hidden="true">&times;</span></button>
+            <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> <strong>Oops, there was an
+            error</strong>
+
+            <p><em class="error_message">ERROR_MESSAGE</em></p>
+
+            <p><strong>Please address the error (if applicable) and try again.</strong></p>
+        </div>
+    </div>
+
+    <div id="add-friend-form-container" class="row">
+        <div class="col-xs-12">
+            <form id="add-friend-form" method="POST">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-10">
+                        <input type="text" id="friend_user_id" name="friend_user_id" placeholder="Friend User ID"
+                               class="form-control" required>
+                    </div>
+                    <div class="col-xs-6 col-sm-2">
+                        <button type="submit" id="add_friend_button" class="btn btn-primary">Add Friend</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="friend-list-table-container">
+        <div class="loading-overlay" title="Loading, please wait...">
+            <div class="loading"><span class="spinner"></span></div>
+        </div>
+        <table class="table table-hover table-striped">
+            <thead>
+            <tr>
+                <th>Send Sup?</th>
+                <th>Name</th>
+                <th>ID</th>
+                <th>Options</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Entries will be loaded here -->
+
+            <template id="friend-list-table-entry-template">
+                <tr class="friend-list-table-entry">
+                    <td class="friend-list-table-send-to">
+                        <label class="send-to-label">
+                            <input type="checkbox" id="send-to-ID-" class="send-to-checkbox"/>
+                            <span class="send-to-text">No</span>
+                        </label>
+                    </td>
+                    <td class="friend-list-table-entry-full-name"></td>
+                    <td class="friend-list-table-entry-user-id"></td>
+                    <td class="friend-list-table-entry-actions">
+                        <button class="btn btn-danger btn-sm remove-friend" type="button">Remove Friend</button>
+                    </td>
+                </tr>
+            </template>
+            </tbody>
+        </table>
+        <div id="send-sups-button-container">
+            <button class="btn btn-success btn-sm" id="send-sups-button" type="button">Send Sups</button>
+        </div>
+    </div>
+</div>
+
+<div id="page-view-sups" class="container page">
+    <div class="page-header">
+        <h1>View Sups from Friends</h1>
+    </div>
+    <p class="lead">Navigate through sups sent to you, sorted from most recent to oldest. <br/> This page updates
+        automatically &mdash; no need to refresh!</p>
+
+    <div id="info-message-view-sups" class="page-info-message-container message-box">
+        <div class="alert alert-info alert-dismissible" role="alert">
+            <button type="button" class="close close-error-box"><span aria-hidden="true">&times;</span></button>
+            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> <strong>Information</strong>
+
+            <p><em class="info_message">INFO_MESSAGE</em></p>
+
+            <p><strong>Feel free to close this message using the "x" to the right.</strong></p>
+        </div>
+    </div>
+
+    <div id="success-message-view-sups" class="page-success-message-container message-box">
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close close-error-box"><span aria-hidden="true">&times;</span></button>
+            <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> <strong>Success</strong>
+
+            <p><em class="success_message">SUCCESS_MESSAGE</em></p>
+        </div>
+    </div>
+
+    <div id="error-message-view-sups" class="page-error-message-container message-box">
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close close-error-box"><span aria-hidden="true">&times;</span></button>
+            <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> <strong>Oops, there was an
+            error</strong>
+
+            <p><em class="error_message">ERROR_MESSAGE</em></p>
+
+            <p><strong>Please address the error (if applicable) and try again.</strong></p>
+        </div>
+    </div>
+
+    <div id="outer-container">
+        <div class="loading-overlay" title="Loading, please wait...">
+            <div class="loading"><span class="spinner"></span></div>
+        </div>
+
+        <div id="carousel-container">
+            <div id="sup-carousel" class="carousel slide">
+                <div class="carousel-inner" id="sups" role="listbox"></div>
+                <template id="sup-template">
+                    <div class="item sup">
+                        <div class="carousel-caption">
+                            <span class="sup-number">1</span> of <span class="total-sups">1</span>
+                            <button class="btn btn-danger btn-xs remove-sup" type="button"><span
+                                    class="glyphicon glyphicon-trash" aria-hidden="true"></span> Remove
+                            </button>
+                            <div class="sup-caption">From <span class="sup-sender-id">USER_ID</span> on <span
+                                    class="sup-date">DATE</span></div>
+                        </div>
+                    </div>
+                </template>
+
+                <a class="left carousel-control" href="#sup-carousel" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#sup-carousel" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="no-sups" id="no-sups">
+            <p>You currently do not have any sups from friends.</p>
+        </div>
+    </div>
+</div>
+
+<div class="container footer-container">
+    <footer id="footer">
+        <p>Created by Andreas Ricci in Winter 2015 for CS 349.</p>
+    </footer>
+</div>
+
+<script type="text/javascript" src="static/js/ext/underscore.js"></script>
+<script type="text/javascript" src="static/js/ext/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="static/js/ext/bootstrap.min.js"></script>
+<script type="text/javascript" src="static/js/utils.js"></script>
+<script type="text/javascript" src="static/js/model.js"></script>
+<script type="text/javascript" src="static/js/view.js"></script>
+<script type="text/javascript" src="static/js/wassup.js"></script>
+</body>
+</html>
+
